@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+/docs
+/lib
+/sandbox/
+/TODOs.md
+.env

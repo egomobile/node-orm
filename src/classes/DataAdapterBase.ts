@@ -55,6 +55,11 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
+    public abstract insert<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+
+    /**
+     * @inheritdoc
+     */
     public abstract query(q: any, ...paramsOrArgs: any[]): Promise<any>;
 
     /**

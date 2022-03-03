@@ -51,6 +51,32 @@ export interface IDataRepository {
     /**
      * Finds a list of items.
      *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * // keep sure to initialize your props
+     * // with a value, which is not (undefined)
+     * class User {
+     *   id: number = -1;
+     *   first_name: string = '';
+     *   last_name: string = '';
+     *   is_active: boolean | null = null;
+     *   is_deleted: boolean = false;
+     * }
+     *
+     * async function load10ActiveUsersAndSkipFirst(repo: IDataRepository): Promise<User[]> {
+     *   // in SQL context
+     *   return await repo.find(User, {
+     *     where: 'is_active=$1 AND (is_deleted=$2 or is_deleted IS NULL)',
+     *     params: [ true, false ],  // $1, $2
+     *
+     *     skip: 1,
+     *     limit: 10
+     *   })
+     * }
+     * ```
+     *
      * @param {Constructor<T>} type The class / type.
      * @param {Nullable<IFindOptions>} [options] The custom options.
      *
@@ -61,6 +87,36 @@ export interface IDataRepository {
     /**
      * Tries to find a simple item.
      *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * // keep sure to initialize your props
+     * // with a value, which is not (undefined)
+     * class User {
+     *   id: number = -1;
+     *   first_name: string = '';
+     *   last_name: string = '';
+     *   is_active: boolean | null = null;
+     *   is_deleted: boolean = false;
+     * }
+     *
+     * async function loadLastActiveUser(repo: IDataRepository): Promise<User> {
+     *   // in SQL context
+     *   return await repo.findOne(User, {
+     *     where: 'is_active=$1 AND (is_deleted=$2 or is_deleted IS NULL)',
+     *     params: [ true, false ],  // $1, $2
+     *
+     *     sort: {
+     *       'created': 'DESC',  // first sort by 'created' (descending)
+     *       'id': 'DESC',  // then by 'id' (descending)
+     *       'last_name': 'ASC',  // then by 'last_name' (ascending)
+     *       'first_name': 'ASC'  // then by 'first_name' (ascending)
+     *     }
+     *   })
+     * }
+     * ```
+     *
      * @param {Constructor<T>} type The class / type.
      * @param {Nullable<IFindOneOptions>} [options] The custom options.
      *
@@ -69,7 +125,54 @@ export interface IDataRepository {
     findOne<T extends unknown = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>): Promise<Nullable<T>>;
 
     /**
+     * Insert one or more entities.
+     *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * // keep sure to initialize your props
+     * // with a value, which is not (undefined)
+     * class User {
+     *   id: number | null = null;
+     *   first_name: string = '';
+     *   last_name: string = '';
+     *   is_active: boolean | null = null;
+     *   is_deleted: boolean = false;
+     * }
+     *
+     * async function createUser(repo: IDataRepository, firstName: string, lastName: string): Promise<User> {
+     *   const newUser = new User()
+     *   newUser.last_name = lastName
+     *   newUser.first_name = firstName
+     *   newUser.is_active = true
+     *
+     *   await repo.insert(newUser)
+     * }
+     * ```
+     *
+     * @param {T|List<T>} entities The entities to insert.
+     */
+    insert<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+
+    /**
      * Does a raw query.
+     *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * async function deleteInactiveUsers(repo: IDataRepository) {
+     *   // in SQL context
+     *   //
+     *   // result is an object or value
+     *   // from the underlying data adapter itself
+     *   const result: any = await repo.query(
+     *     "UPDATE users SET is_deleted=$1 WHERE is_active=$2;",
+     *     false, false  // $1, $2
+     *   )
+     * }
+     * ```
      *
      * @param {any} q The object / value, which represents the query.
      * @param {any[]} [paramsOrArgs] A list of optional parameters or arguments for the query.
@@ -81,12 +184,50 @@ export interface IDataRepository {
     /**
      * Removes one or more entities.
      *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * // keep sure to initialize your props
+     * // with a value, which is not (undefined)
+     * class User {
+     *   id: number = -1;
+     *   is_active: boolean | null = null;
+     * }
+     *
+     * async function removeInactiveUsers(repo: IDataRepository, users: User[]) {
+     *   const inactiveUsers = users.find(u => u.is_active === false)
+     *
+     *   await repo.remove(inactiveUsers)
+     * }
+     * ```
+     *
      * @param {T|List<T>} entities The entities to remove.
      */
     remove<T extends unknown = any>(entities: T | List<T>): Promise<void>;
 
     /**
      * Updates one or more entities.
+     *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * // keep sure to initialize your props
+     * // with a value, which is not (undefined)
+     * class User {
+     *   id: number = -1;
+     *   is_deleted: boolean = false;
+     * }
+     *
+     * async function deleteUsers(repo: IDataRepository, users: User[]) {
+     *   users.forEach((user) => {
+     *     user.is_deleted = true
+     *   })
+     *
+     *   await repo.update(inactiveUsers)
+     * }
+     * ```
      *
      * @param {T|List<T>} entities The entities to update.
      */

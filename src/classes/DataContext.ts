@@ -39,6 +39,10 @@ export class DataContext implements IDataContext {
         return this.options.adapter.findOne<T>(type, options);
     }
 
+    public insert<T extends unknown = any>(entities: T | List<T>) {
+        return this.options.adapter.insert(entities);
+    }
+
     public query<T extends unknown = any>(q: any, ...paramsOrArgs: any[]): Promise<T> {
         return this.options.adapter.query(q, ...paramsOrArgs);
     }

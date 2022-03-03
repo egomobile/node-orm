@@ -39,14 +39,14 @@ export function asList<T extends unknown = any>(itemOrList: Nilable<T | List<T>>
     }
 }
 
-export function isNil(val: unknown): val is (null | undefined) {
-    return val === null || typeof val === 'undefined';
-}
-
 export function isIterable(obj: any): obj is List<unknown> {
     if (!obj) {
         return typeof obj[Symbol.iterator] === 'function';
     } else {
         return false;
     }
+}
+
+export function isNil(val: unknown): val is (null | undefined) {
+    return val === null || typeof val === 'undefined';
 }

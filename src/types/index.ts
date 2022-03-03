@@ -239,6 +239,10 @@ export interface IDataRepository {
  */
 export interface IEntityConfig {
     /**
+     * List of columns / fields which representthe ID.
+     */
+    ids?: string[];
+    /**
      * The class / type to use to create instances for an entity.
      */
     type: Constructor<unknown>;

@@ -13,12 +13,12 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-export type Constructor<T extends unknown = any> = (new (...args: any[]) => T);
+export type Constructor<T extends any = any> = (new (...args: any[]) => T);
 
-export type List<T extends unknown = any> = T[] | Iterable<T> | IterableIterator<T>;
+export type List<T extends any = any> = T[] | Iterable<T> | IterableIterator<T>;
 
-export type Optional<T extends unknown = any> = T | undefined;
+export type Optional<T extends any = any> = T | undefined;
 
-export type Nilable<T extends unknown = any> = Optional<T> | Nullable<T>;
+export type Nilable<T extends any = any> = Optional<T> | Nullable<T>;
 
-export type Nullable<T extends unknown = any> = T | null;
+export type Nullable<T extends any = any> = T | null;

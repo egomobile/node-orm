@@ -82,7 +82,7 @@ export interface IDataRepository {
      *
      * @returns {Promise<T[]>} The promise with the items.
      */
-    find<T extends unknown = any>(type: Constructor<T>, options?: Nullable<IFindOptions>): Promise<T[]>;
+    find<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOptions>): Promise<T[]>;
 
     /**
      * Tries to find a simple item.
@@ -122,7 +122,7 @@ export interface IDataRepository {
      *
      * @returns {Promise<Nullable<T>>} The promise with the item or (null) if not found.
      */
-    findOne<T extends unknown = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>): Promise<Nullable<T>>;
+    findOne<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>): Promise<Nullable<T>>;
 
     /**
      * Insert one or more entities.
@@ -153,7 +153,7 @@ export interface IDataRepository {
      *
      * @param {T|List<T>} entities The entities to insert.
      */
-    insert<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+    insert<T extends any = any>(entities: T | List<T>): Promise<void>;
 
     /**
      * Does a raw query.
@@ -179,7 +179,7 @@ export interface IDataRepository {
      *
      * @returns {Promise<T>} The promise with the raw result.
      */
-    query<T extends unknown = any>(q: any, ...paramsOrArgs: any[]): Promise<T>;
+    query<T extends any = any>(q: any, ...paramsOrArgs: any[]): Promise<T>;
 
     /**
      * Removes one or more entities.
@@ -204,7 +204,7 @@ export interface IDataRepository {
      *
      * @param {T|List<T>} entities The entities to remove.
      */
-    remove<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+    remove<T extends any = any>(entities: T | List<T>): Promise<void>;
 
     /**
      * Updates one or more entities.
@@ -231,7 +231,7 @@ export interface IDataRepository {
      *
      * @param {T|List<T>} entities The entities to update.
      */
-    update<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+    update<T extends any = any>(entities: T | List<T>): Promise<void>;
 }
 
 /**
@@ -245,7 +245,7 @@ export interface IEntityConfig {
     /**
      * The class / type to use to create instances for an entity.
      */
-    type: Constructor<unknown>;
+    type: Constructor<any>;
 }
 
 /**

@@ -69,6 +69,15 @@ newUser.last_name = "Doe";
 // ... and add it to database
 await context.insert(newUser);
 
+// depending on data adapter, it might be
+// possible to do raw queries
+const result: any = context.query(
+  "SELECT * FROM users WHERE id=$1 AND is_active=$2;",
+  23979,
+  true
+);
+console.log(result);
+
 main().catch(console.error);
 ```
 

@@ -45,17 +45,17 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
-    public abstract find<T extends unknown = any>(type: Constructor<T>, options?: Nullable<IFindOptions>): Promise<T[]>;
+    public abstract find<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOptions>): Promise<T[]>;
 
     /**
      * @inheritdoc
      */
-    public abstract findOne<T extends unknown = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>): Promise<Nullable<T>>;
+    public abstract findOne<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>): Promise<Nullable<T>>;
 
     /**
      * @inheritdoc
      */
-    public abstract insert<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+    public abstract insert<T extends any = any>(entities: T | List<T>): Promise<void>;
 
     /**
      * @inheritdoc
@@ -65,7 +65,7 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
-    public abstract remove<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+    public abstract remove<T extends any = any>(entities: T | List<T>): Promise<void>;
 
     /**
      * @inheritdoc
@@ -80,5 +80,5 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
-    public abstract update<T extends unknown = any>(entities: T | List<T>): Promise<void>;
+    public abstract update<T extends any = any>(entities: T | List<T>): Promise<void>;
 }

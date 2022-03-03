@@ -19,7 +19,13 @@ import type { IDataAdapter, IDataContext, EntityConfigurations, IFindOptions, IF
 import type { Constructor, List, Nullable } from '../types/internal';
 
 export interface IDataContextOptions {
+    /**
+     * The data adapter to use.
+     */
     adapter: IDataAdapter;
+    /**
+     * The configurations of all entities / tables.
+     */
     entities: EntityConfigurations;
 }
 
@@ -31,27 +37,27 @@ export class DataContext implements IDataContext {
         return this.options.entities;
     }
 
-    public find<T extends unknown = any>(type: Constructor<T>, options?: Nullable<IFindOptions>) {
+    public find<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOptions>) {
         return this.options.adapter.find<T>(type, options);
     }
 
-    public findOne<T extends unknown = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>) {
+    public findOne<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>) {
         return this.options.adapter.findOne<T>(type, options);
     }
 
-    public insert<T extends unknown = any>(entities: T | List<T>) {
+    public insert<T extends any = any>(entities: T | List<T>) {
         return this.options.adapter.insert(entities);
     }
 
-    public query<T extends unknown = any>(q: any, ...paramsOrArgs: any[]): Promise<T> {
+    public query<T extends any = any>(q: any, ...paramsOrArgs: any[]): Promise<T> {
         return this.options.adapter.query(q, ...paramsOrArgs);
     }
 
-    public remove<T extends unknown = any>(entities: T | List<T>) {
+    public remove<T extends any = any>(entities: T | List<T>) {
         return this.options.adapter.remove<T>(entities);
     }
 
-    public update<T extends unknown = any>(entities: T | List<T>) {
+    public update<T extends any = any>(entities: T | List<T>) {
         return this.options.adapter.update<T>(entities);
     }
 }

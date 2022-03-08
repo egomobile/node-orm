@@ -1,6 +1,6 @@
 # Change Log (@egomobile/orm)
 
-## 0.3.0
+## 0.3.1
 
 - `isNull()` => `isExplicitNull()`
 - (bug-)fixes

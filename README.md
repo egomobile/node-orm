@@ -17,7 +17,7 @@ npm install --save @egomobile/orm
 ## Usage
 
 ```typescript
-import { createDataContext } from "@egomobile/node-orm";
+import { createDataContext } from "@egomobile/orm";
 import { SQLDataAdapter } from "./data/adapter";
 import { User } from "./data/entities";
 

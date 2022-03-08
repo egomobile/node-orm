@@ -71,7 +71,7 @@ await context.insert(newUser);
 
 // depending on data adapter, it might be
 // possible to do raw queries
-const result: any = context.query(
+const result: any = await context.query(
   "SELECT * FROM users WHERE id=$1 AND is_active=$2;",
   23979,
   true

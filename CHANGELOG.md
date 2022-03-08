@@ -1,6 +1,6 @@
 # Change Log (@egomobile/orm)
 
-## 0.2.0
+## 0.2.1
 
 - add functions, types and values to handle `(null)`s
 

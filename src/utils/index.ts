@@ -18,10 +18,21 @@ import type { NULL } from '../constants';
 /**
  * Checks if a value represents an explicit (null).
  *
+ * @example
+ * ```
+ * import { isExplicitNull, NULL } from '@egomobile/orm'
+ *
+ * // following values return (true)
+ * isExplicitNull(NULL)
+ * isExplicitNull(Symbol('NULL'))
+ *
+ * // anything else is (false)
+ * ```
+ *
  * @param {any} val The value to check.
  *
  * @returns {boolean} Is explicit (null) or not.
  */
-export function isNull(val: any): val is typeof NULL {
+export function isExplicitNull(val: any): val is typeof NULL {
     return typeof val === 'symbol' && String(val) === 'Symbol(NULL)';
 }

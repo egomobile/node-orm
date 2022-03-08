@@ -13,8 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-export type Constructor<T extends any = any> = (new (...args: any[]) => T);
-
-export type List<T extends any = any> = T[] | Iterable<T> | IterableIterator<T>;
-
-export type Nilable<T extends any = any> = T | null | undefined;
+/**
+ * An unique value, which represents
+ */
+export const NULL = Symbol('NULL');

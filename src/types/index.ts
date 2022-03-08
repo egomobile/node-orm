@@ -13,7 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import type { Constructor, List, Nilable, Nullable } from './internal';
+import type { NULL } from '../constants';
+import type { Constructor, List, Nilable } from './internal';
 
 /**
  * Object with entity configurations.
@@ -78,11 +79,11 @@ export interface IDataRepository {
      * ```
      *
      * @param {Constructor<T>} type The class / type.
-     * @param {Nullable<IFindOptions>} [options] The custom options.
+     * @param {IFindOptions|null} [options] The custom options.
      *
      * @returns {Promise<T[]>} The promise with the items.
      */
-    find<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOptions>): Promise<T[]>;
+    find<T extends any = any>(type: Constructor<T>, options?: IFindOptions | null): Promise<T[]>;
 
     /**
      * Tries to find a simple item.
@@ -120,9 +121,9 @@ export interface IDataRepository {
      * @param {Constructor<T>} type The class / type.
      * @param {Nullable<IFindOneOptions>} [options] The custom options.
      *
-     * @returns {Promise<Nullable<T>>} The promise with the item or (null) if not found.
+     * @returns {Promise<T|null>} The promise with the item or (null) if not found.
      */
-    findOne<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>): Promise<Nullable<T>>;
+    findOne<T extends any = any>(type: Constructor<T>, options?: IFindOneOptions | null): Promise<T | null>;
 
     /**
      * Insert one or more entities.
@@ -283,3 +284,8 @@ export interface IFindOptions extends IFindOneOptions {
      */
     limit?: Nilable<number>;
 }
+
+/**
+ * A data(-base) value, which can also be (null) or something like that.
+ */
+export type Nullable<T extends any = any> = T | typeof NULL;

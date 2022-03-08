@@ -13,8 +13,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-export type Constructor<T extends any = any> = (new (...args: any[]) => T);
+import type { NULL } from '../constants';
 
-export type List<T extends any = any> = T[] | Iterable<T> | IterableIterator<T>;
-
-export type Nilable<T extends any = any> = T | null | undefined;
+/**
+ * Checks if a value represents an explicit (null).
+ *
+ * @param {any} val The value to check.
+ *
+ * @returns {boolean} Is explicit (null) or not.
+ */
+export function isNull(val: any): val is typeof NULL {
+    return typeof val === 'symbol' && String(val) === 'Symbol(NULL)';
+}

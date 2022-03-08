@@ -16,7 +16,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import type { IDataAdapter, IDataContext, EntityConfigurations, IFindOptions, IFindOneOptions } from '../types';
-import type { Constructor, List, Nullable } from '../types/internal';
+import type { Constructor, List } from '../types/internal';
 
 export interface IDataContextOptions {
     /**
@@ -37,11 +37,11 @@ export class DataContext implements IDataContext {
         return this.options.entities;
     }
 
-    public find<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOptions>) {
+    public find<T extends any = any>(type: Constructor<T>, options?: IFindOptions | null) {
         return this.options.adapter.find<T>(type, options);
     }
 
-    public findOne<T extends any = any>(type: Constructor<T>, options?: Nullable<IFindOneOptions>) {
+    public findOne<T extends any = any>(type: Constructor<T>, options?: IFindOneOptions | null) {
         return this.options.adapter.findOne<T>(type, options);
     }
 

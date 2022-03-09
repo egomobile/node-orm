@@ -72,7 +72,7 @@ export interface IDataRepository {
      *     where: 'is_active=$1 AND (is_deleted=$2 or is_deleted IS NULL)',
      *     params: [ true, false ],  // $1, $2
      *
-     *     skip: 1,
+     *     offset: 1,
      *     limit: 10
      *   })
      * }
@@ -258,13 +258,13 @@ export interface IFindOneOptions {
      */
     fields?: Nilable<any[]>;
     /**
+     * The number of items to skip. Default: 0
+     */
+    offset?: Nilable<number>;
+    /**
      * An object that represents the parameters for the 'where' part.
      */
     params?: any;
-    /**
-     * The number of items to skip. Default: 0
-     */
-    skip?: Nilable<number>;
     /**
      * An object, which is used to sort the result.
      */

@@ -39,7 +39,7 @@ async function main() {
     where: "is_active=$1 AND is_deleted=$2",
     params: [true, false], // $1, $2
 
-    skip: 1, // skip the first
+    offset: 1, // skip the first
     limit: 100, // only return 100 rows
   });
 

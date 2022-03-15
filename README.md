@@ -17,13 +17,30 @@ npm install --save @egomobile/orm
 ## Usage
 
 ```typescript
-import { createDataContext } from "@egomobile/orm";
-import { SQLDataAdapter } from "./data/adapter";
-import { User } from "./data/entities";
+import { createDataContext, DbNullable, NULL as DbNull } from "@egomobile/orm";
+import { PostgreSQLDataAdapter } from "@egomobile/orm-pg"; // npm i @egomobile/orm-pg
+
+// the reason, why non-nullable fields
+// can have (null) values is, that (null)
+// indicates, that the underlying fields
+// should not be defined / updated in the
+// database
+//
+// to set a value explicitly (null) in database
+// use the value of DbNull instead
+class User {
+  // non-nullable fields
+  public id: number | null = null;
+  public first_name: string | null = null;
+  public last_name: string | null = null;
+
+  // nullable fields
+  public email: DbNullable<string | null> = null;
+}
 
 async function main() {
-  const context = createDataContext({
-    adapter: new SQLDataAdapter(), // use custom data adapter, based on a SQL engine
+  const context = await createDataContext({
+    adapter: new PostgreSQLDataAdapter(),
     entities: {
       // name of the entity / table
       users: {
@@ -53,6 +70,7 @@ async function main() {
     // update with new data
     specificUser.last_name = "Doe";
     specificUser.first_name = "Jane";
+    specificUser.email = DbNull;
     await context.update(specificUser);
 
     // remove from database

@@ -1,6 +1,6 @@
 # Change Log (@egomobile/orm)
 
-## 0.4.0
+## 0.4.1
 
 - **BREAKING CHANGE**: change `skip` to `offset` in [IFindOneOptions interface](https://egomobile.github.io/node-orm/interfaces/IFindOneOptions.html)
 

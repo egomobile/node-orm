@@ -55,7 +55,7 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
-    public abstract insert<T extends any = any>(entities: T | List<T>): Promise<void>;
+    public abstract insert<T extends any = any>(entities: T | List<T>): Promise<T>;
 
     /**
      * @inheritdoc
@@ -65,7 +65,7 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
-    public abstract remove<T extends any = any>(entities: T | List<T>): Promise<void>;
+    public abstract remove<T extends any = any>(entities: T | List<T>): Promise<T>;
 
     /**
      * @inheritdoc
@@ -80,5 +80,5 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
-    public abstract update<T extends any = any>(entities: T | List<T>): Promise<void>;
+    public abstract update<T extends any = any>(entities: T | List<T>): Promise<T>;
 }

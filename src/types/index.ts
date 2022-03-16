@@ -153,8 +153,10 @@ export interface IDataRepository {
      * ```
      *
      * @param {T|List<T>} entities The entities to insert.
+     *
+     * @returns {Promise<T>} The promise with the inserted entity.
      */
-    insert<T extends any = any>(entities: T | List<T>): Promise<void>;
+    insert<T extends any = any>(entities: T | List<T>): Promise<T>;
 
     /**
      * Does a raw query.
@@ -204,8 +206,10 @@ export interface IDataRepository {
      * ```
      *
      * @param {T|List<T>} entities The entities to remove.
+     *
+     * @returns {Promise<T>} The promise with the removed entity.
      */
-    remove<T extends any = any>(entities: T | List<T>): Promise<void>;
+    remove<T extends any = any>(entities: T | List<T>): Promise<T>;
 
     /**
      * Updates one or more entities.
@@ -231,8 +235,10 @@ export interface IDataRepository {
      * ```
      *
      * @param {T|List<T>} entities The entities to update.
+     *
+     * @returns {Promise<T>} The promise with the updated entity.
      */
-    update<T extends any = any>(entities: T | List<T>): Promise<void>;
+    update<T extends any = any>(entities: T | List<T>): Promise<T>;
 }
 
 /**

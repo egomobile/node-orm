@@ -1,6 +1,6 @@
 # Change Log (@egomobile/orm)
 
-## 0.6.0
+## 0.6.1
 
 - add types which helpds to realize data transformations between databases and entities
 - add helper methods to [DataAdapterBase](https://egomobile.github.io/node-orm/classes/DataAdapterBase.html) to simply access entity configuration data

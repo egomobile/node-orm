@@ -52,7 +52,14 @@ export abstract class DataAdapterBase implements IDataAdapter {
      */
     public abstract findOne<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOneOptions>): Promise<T | null>;
 
-    private getEntityByType(type: Constructor<any>) {
+    /**
+     * Returns an entity by its type.
+     *
+     * @param {Constructor<any>} type The type of the entity.
+     *
+     * @returns {object|null} The object or (null), if not found.
+     */
+    public getEntityByType(type: Constructor<any>) {
         for (const [name, config] of Object.entries(this.context.entities)) {
             if (config.type === type) {
                 return {
@@ -65,7 +72,14 @@ export abstract class DataAdapterBase implements IDataAdapter {
         return null;
     }
 
-    private getEntityByTypeOrThrow(type: Constructor<any>) {
+    /**
+     * Returns an entity by its type or throws an exception if not found.
+     *
+     * @param {Constructor<any>} type The type of the entity.
+     *
+     * @returns {object} The object.
+     */
+    public getEntityByTypeOrThrow(type: Constructor<any>) {
         const entity = this.getEntityByType(type);
         if (entity) {
             return entity;

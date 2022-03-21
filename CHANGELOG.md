@@ -1,5 +1,10 @@
 # Change Log (@egomobile/orm)
 
+## 0.6.0
+
+- add types which helpds to realize data transformations between databases and entities
+- add helper methods to [DataAdapterBase](https://egomobile.github.io/node-orm/classes/DataAdapterBase.html) to simply access entity configuration data
+
 ## 0.5.0
 
 - `insert()`, `remove()` and `update()` of [IDataRepository](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html) return the updated entity now

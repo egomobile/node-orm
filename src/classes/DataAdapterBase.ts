@@ -45,12 +45,81 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
-    public abstract find<T extends any = any>(type: Constructor<T>, options?: IFindOptions | null): Promise<T[]>;
+    public abstract find<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOptions>): Promise<T[]>;
 
     /**
      * @inheritdoc
      */
-    public abstract findOne<T extends any = any>(type: Constructor<T>, options?: IFindOneOptions | null): Promise<T | null>;
+    public abstract findOne<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOneOptions>): Promise<T | null>;
+
+    private getEntityByType(type: Constructor<any>) {
+        for (const [name, config] of Object.entries(this.context.entities)) {
+            if (config.type === type) {
+                return {
+                    config,
+                    name
+                };
+            }
+        }
+
+        return null;
+    }
+
+    private getEntityByTypeOrThrow(type: Constructor<any>) {
+        const entity = this.getEntityByType(type);
+        if (entity) {
+            return entity;
+        } else {
+            throw new Error(`Entity type ${type.name} not configured`);
+        }
+    }
+
+    /**
+     * Returns the list of entity/table fields, which represent
+     * the IDs of a row.
+     *
+     * @param {Constructor<any>} type The type.
+     *
+     * @returns {string[]} The list of field names.
+     */
+    public getEntityIdsByType(type: Constructor<any>): string[] {
+        const entity = this.getEntityByTypeOrThrow(type);
+
+        if (entity.config.ids?.length) {
+            return entity.config.ids;
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * Returns the list of entity fields columns, which represent
+     * the IDs of a row, or throws an exception if not defined.
+     *
+     * @param {Constructor<any>} type The type.
+     *
+     * @returns {string[]} The list of ID fields.
+     */
+    public getEntityIdsByTypeOrThrow(type: Constructor<any>): string[] {
+        const entity = this.getEntityByTypeOrThrow(type);
+
+        if (entity.config.ids?.length) {
+            return entity.config.ids;
+        } else {
+            throw new Error(`No IDs defined for type ${type.name}`);
+        }
+    }
+
+    /**
+     * Returns the name of the underlying entity/table by type or throws an exception, if not configured.
+     *
+     * @param {Constructor<any>} type The type.
+     *
+     * @returns {string} The name of the underlying entity/table name.
+     */
+    public getEntityNameByTypeOrThrow(type: Constructor<any>): string {
+        return this.getEntityByTypeOrThrow(type).name;
+    }
 
     /**
      * @inheritdoc

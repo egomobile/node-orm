@@ -17,6 +17,15 @@ import type { NULL } from '../constants';
 import type { Constructor, List, Nilable } from './internal';
 
 /**
+ * An action, which transforms data.
+ *
+ * @param {any} value The input value.
+ *
+ * @returns {any} The output value.
+ */
+export type DataTransformer = (value: any) => any;
+
+/**
  * Object with entity configurations.
  */
 export type EntityConfigurations = Record<string, IEntityConfig>;
@@ -79,11 +88,11 @@ export interface IDataRepository {
      * ```
      *
      * @param {Constructor<T>} type The class / type.
-     * @param {IFindOptions|null} [options] The custom options.
+     * @param {Nilable<IFindOptions>} [options] The custom options.
      *
      * @returns {Promise<T[]>} The promise with the items.
      */
-    find<T extends any = any>(type: Constructor<T>, options?: IFindOptions | null): Promise<T[]>;
+    find<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOptions>): Promise<T[]>;
 
     /**
      * Tries to find a simple item.
@@ -119,11 +128,11 @@ export interface IDataRepository {
      * ```
      *
      * @param {Constructor<T>} type The class / type.
-     * @param {Nullable<IFindOneOptions>} [options] The custom options.
+     * @param {Nilable<IFindOneOptions>} [options] The custom options.
      *
      * @returns {Promise<T|null>} The promise with the item or (null) if not found.
      */
-    findOne<T extends any = any>(type: Constructor<T>, options?: IFindOneOptions | null): Promise<T | null>;
+    findOne<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOneOptions>): Promise<T | null>;
 
     /**
      * Insert one or more entities.
@@ -246,13 +255,44 @@ export interface IDataRepository {
  */
 export interface IEntityConfig {
     /**
+     * The custom field configurations.
+     */
+    fields?: Nilable<Record<string, IEntityFieldConfig>>;
+    /**
      * List of columns / fields which representthe ID.
      */
-    ids?: string[];
+    ids?: Nilable<string[]>;
     /**
      * The class / type to use to create instances for an entity.
      */
     type: Constructor<any>;
+}
+
+/**
+ * A configuration for an entity field.
+ */
+export interface IEntityFieldConfig {
+    /**
+     * The custom and optional data transformer.
+     */
+    transformer?: Nilable<IEntityFieldTransformer>;
+}
+
+/**
+ * An object, which transforms the data of a field.
+ */
+export interface IEntityFieldTransformer {
+    /**
+     * The optional action to invoke, when
+     * data comes from database to entity.
+     */
+    from?: Nilable<DataTransformer>;
+    /**
+     * The optional action to invoke, when
+     * data of an entity field is written
+     * to database.
+     */
+    to?: Nilable<DataTransformer>;
 }
 
 /**
@@ -270,7 +310,7 @@ export interface IFindOneOptions {
     /**
      * An object that represents the parameters for the 'where' part.
      */
-    params?: any;
+    params?: Nilable;
     /**
      * An object, which is used to sort the result.
      */

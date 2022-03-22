@@ -194,6 +194,49 @@ export interface IDataRepository {
     query<T extends any = any>(q: any, ...paramsOrArgs: any[]): Promise<T>;
 
     /**
+     * Does a raw query and maps the result(s) to entity objects.
+     * The classes do not need to be configured in context, so it is
+     * possbile to implement and work with "joins".
+     *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * class UserAndRole {
+     *   role_id!: string;
+     *   user_id!: string;
+     * }
+     *
+     * async function loadUserRoles(repo: IDataRepository): Promise<UserAndRole[]> {
+     *   // PostgreSQL example
+     *   // s. https://github.com/egomobile/node-orm-pg
+     *
+     *   return await repo.queryAndMap(
+     *     UserAndRole,  // type of the target entity
+     *                   // does not need to be configured
+     *                   // in data context
+     *
+     *     // build query
+     *     "SELECT DISTINCT ur.id AS role_id, u.id AS user_id " +
+     *     "FROM user_roles ur " +
+     *     "INNER JOIN users u ON u.id = ur.user_id " +
+     *     "WHERE u.is_active = $1 AND u.is_deleted = $2;",
+     *
+     *     // additional parameters
+     *     true, false  // $1, $2
+     *   )
+     * }
+     * ```
+     *
+     * @param {Constructor<T>} type The target type.
+     * @param {any} q The object / value, which represents the query.
+     * @param {any[]} [paramsOrArgs] A list of optional parameters or arguments for the query.
+     *
+     * @returns {Promise<T[]>} The promise with the mapped entities.
+     */
+    queryAndMap<T extends any = any>(type: Constructor<T>, q: any, ...paramsOrArgs: any[]): Promise<T[]>;
+
+    /**
      * Removes one or more entities.
      *
      * @example

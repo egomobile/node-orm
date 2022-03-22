@@ -218,7 +218,7 @@ export interface IDataRepository {
      *
      *     // build query
      *     "SELECT DISTINCT ur.id AS role_id, u.id AS user_id " +
-     *     "FROM user_roles ur "
+     *     "FROM user_roles ur " +
      *     "INNER JOIN users u ON u.id = ur.user_id " +
      *     "WHERE u.is_active = $1 AND u.is_deleted = $2;",
      *

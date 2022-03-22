@@ -1,5 +1,9 @@
 # Change Log (@egomobile/orm)
 
+## 0.7.0
+
+- add [queryAndMap()](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html#queryAndMap)
+
 ## 0.6.1
 
 - add types which helpds to realize data transformations between databases and entities

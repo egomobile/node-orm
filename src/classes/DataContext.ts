@@ -53,6 +53,10 @@ export class DataContext implements IDataContext {
         return this.options.adapter.query(q, ...paramsOrArgs);
     }
 
+    public queryAndMap<T extends any = any>(type: Constructor<T>, q: any, ...paramsOrArgs: any[]): Promise<T[]> {
+        return this.options.adapter.queryAndMap(type, q, ...paramsOrArgs);
+    }
+
     public remove<T extends any = any>(entities: T | List<T>) {
         return this.options.adapter.remove<T>(entities);
     }

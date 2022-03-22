@@ -148,6 +148,11 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
+    public abstract queryAndMap(type: Constructor<any>, q: any, ...paramsOrArgs: any[]): Promise<any[]>;
+
+    /**
+     * @inheritdoc
+     */
     public abstract remove<T extends any = any>(entities: T | List<T>): Promise<T[]>;
 
     /**

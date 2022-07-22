@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import type { NULL } from '../constants';
+import type { NULL } from "../constants";
 
 /**
  * Checks if a value represents an explicit (null).
@@ -34,5 +34,5 @@ import type { NULL } from '../constants';
  * @returns {boolean} Is explicit (null) or not.
  */
 export function isExplicitNull(val: any): val is typeof NULL {
-    return typeof val === 'symbol' && String(val) === 'Symbol(NULL)';
+    return typeof val === "symbol" && String(val) === "Symbol(NULL)";
 }

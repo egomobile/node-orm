@@ -16,4 +16,4 @@
 /**
  * An unique value, which represents
  */
-export const NULL = Symbol('NULL');
+export const NULL = Symbol("NULL");

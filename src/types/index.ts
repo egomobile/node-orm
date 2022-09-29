@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import type { NULL } from '../constants';
-import type { Constructor, List, Nilable } from './internal';
+import type { NULL } from "../constants";
+import type { Constructor, List, Nilable } from "./internal";
 
 /**
  * An action, which transforms data.

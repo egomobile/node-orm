@@ -13,9 +13,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import { NULL } from '../constants';
-import type { IEntityFieldTransformer } from '../types';
-import { isNil } from '../utils/internal';
+import { NULL } from "../constants";
+import type { IEntityFieldTransformer } from "../types";
+import { isNil } from "../utils/internal";
 
 /**
  * Converts from and to a string value.
@@ -24,20 +24,26 @@ export const stringTransformer: IEntityFieldTransformer = {
     /**
      * @inheritdoc
      */
-    from: (value) => valueToString(value, NULL),
+    "from": (value) => {
+        return valueToString(value, NULL);
+    },
 
     /**
      * @inheritdoc
      */
-    to: (value) => valueToString(value, value)
+    "to": (value) => {
+        return valueToString(value, value);
+    }
 };
 
 function valueToString(value: unknown, ifNilValue: any): any {
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
         return value;
-    } else if (isNil(value)) {
+    }
+    else if (isNil(value)) {
         return ifNilValue;
-    } else {
+    }
+    else {
         return String(value);
     }
 }

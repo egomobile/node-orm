@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import type { IDataAdapter, IDataContext, IFindOneOptions, IFindOptions } from '../types';
-import type { Constructor, List, Nilable } from '../types/internal';
+import type { IDataAdapter, IDataContext, IFindOneOptions, IFindOptions } from "../types";
+import type { Constructor, List, Nilable } from "../types/internal";
 
 /**
  * A basic data adapter.
@@ -35,7 +35,7 @@ export abstract class DataAdapterBase implements IDataAdapter {
     public get context(): IDataContext {
         // eslint-disable-next-line no-underscore-dangle
         if (!this._context) {
-            throw new TypeError('context is not defined');
+            throw new TypeError("context is not defined");
         }
 
         // eslint-disable-next-line no-underscore-dangle
@@ -83,7 +83,8 @@ export abstract class DataAdapterBase implements IDataAdapter {
         const entity = this.getEntityByType(type);
         if (entity) {
             return entity;
-        } else {
+        }
+        else {
             throw new Error(`Entity type ${type.name} not configured`);
         }
     }
@@ -101,7 +102,8 @@ export abstract class DataAdapterBase implements IDataAdapter {
 
         if (entity.config.ids?.length) {
             return entity.config.ids;
-        } else {
+        }
+        else {
             return [];
         }
     }
@@ -119,7 +121,8 @@ export abstract class DataAdapterBase implements IDataAdapter {
 
         if (entity.config.ids?.length) {
             return entity.config.ids;
-        } else {
+        }
+        else {
             throw new Error(`No IDs defined for type ${type.name}`);
         }
     }

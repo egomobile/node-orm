@@ -1,5 +1,12 @@
 # Change Log (@egomobile/orm)
 
+## 0.8.0
+
+- add `getDbValue()` utility function
+- library required at least [Node 14](https://nodejs.org/en/blog/release/v14.0.0/) now
+- apply new [linter settings](https://github.com/egomobile/eslint-config-ego)
+- `npm update`s
+
 ## 0.7.0
 
 - add [queryAndMap()](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html#queryAndMap)

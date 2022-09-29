@@ -13,9 +13,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import { NULL } from '../constants';
-import type { IEntityFieldTransformer } from '../types';
-import { isNil } from '../utils/internal';
+import { NULL } from "../constants";
+import type { IEntityFieldTransformer } from "../types";
+import { isNil } from "../utils/internal";
 
 /**
  * Converts from and to a float value.
@@ -24,24 +24,31 @@ export const floatTransformer: IEntityFieldTransformer = {
     /**
      * @inheritdoc
      */
-    from: (value) => valueToFloat(value, NULL),
+    "from": (value) => {
+        return valueToFloat(value, NULL);
+    },
 
     /**
      * @inheritdoc
      */
-    to: (value) => valueToFloat(value, value)
+    "to": (value) => {
+        return valueToFloat(value, value);
+    }
 };
 
 function valueToFloat(value: unknown, ifNilValue: any): any {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
         return value;
-    } else if (isNil(value)) {
+    }
+    else if (isNil(value)) {
         return ifNilValue;
-    } else {
+    }
+    else {
         const str = String(value).trim();
         if (str.length) {
             return parseFloat(str);
-        } else {
+        }
+        else {
             return ifNilValue;
         }
     }

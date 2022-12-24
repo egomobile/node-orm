@@ -161,11 +161,14 @@ export interface IDataRepository {
      * }
      * ```
      *
-     * @param {T|List<T>} entities The entities to insert.
+     * @param {T} entity The entity to insert.
+     * @param {List<T>} entities The entities to insert.
      *
-     * @returns {Promise<T[]>} The promise with the inserted entities.
+     * @returns {Promise<T|T[]>} The promise with the inserted entity/entities.
      */
-    insert<T extends any = any>(entities: T | List<T>): Promise<T[]>;
+    insert<T extends any = any>(entity: T): Promise<T>;
+    insert<T extends any = any>(entities: List<T>): Promise<T[]>;
+    insert<T extends any = any>(entityOrEntities: T | List<T>): Promise<T | T[]>;
 
     /**
      * Does a raw query.
@@ -257,11 +260,14 @@ export interface IDataRepository {
      * }
      * ```
      *
-     * @param {T|List<T>} entities The entities to remove.
+     * @param {T} entity The entity to remove.
+     * @param {List<T>} entities The entities to remove.
      *
-     * @returns {Promise<T>} The promise with the removed entities.
+     * @returns {Promise<T|T[]>} The promise with the removed entity/entities.
      */
-    remove<T extends any = any>(entities: T | List<T>): Promise<T[]>;
+    remove<T extends any = any>(entity: T): Promise<T>;
+    remove<T extends any = any>(entities: List<T>): Promise<T[]>;
+    remove<T extends any = any>(entityOrEntities: T | List<T>): Promise<T | T[]>;
 
     /**
      * Updates one or more entities.
@@ -286,11 +292,14 @@ export interface IDataRepository {
      * }
      * ```
      *
-     * @param {T|List<T>} entities The entities to update.
+     * @param {T} entity The entity to update.
+     * @param {List<T>} entities The entities to update.
      *
-     * @returns {Promise<T>} The promise with the updated entities.
+     * @returns {Promise<T|T[]>} The promise with the updated entity/entities.
      */
-    update<T extends any = any>(entities: T | List<T>): Promise<T[]>;
+    update<T extends any = any>(entity: T): Promise<T>;
+    update<T extends any = any>(entities: List<T>): Promise<T[]>;
+    update<T extends any = any>(entityOrEntities: T | List<T>): Promise<T | T[]>;
 }
 
 /**

@@ -39,5 +39,5 @@ export async function createDataContext(options: ICreateDataContextOptions): Pro
 
 export * from "./types";
 export * from "./constants";
-export * from "./classes/DataAdapterBase";
+export * from "./classes";
 export * from "./utils";

@@ -1,5 +1,12 @@
 # Change Log (@egomobile/orm)
 
+## 0.9.0
+
+- **BREAKING CHANGE**: improve interfaces of [insert()](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html#insert), [remove()](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html#remove) and [update()](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html#update) methods
+- library required at least [Node 16](https://nodejs.org/en/blog/release/v16.0.0/) now
+- code cleanups and improvements
+- `npm update`s
+
 ## 0.8.0
 
 - add `getDbValue()` utility function

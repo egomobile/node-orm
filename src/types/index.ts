@@ -59,6 +59,33 @@ export interface IDataAdapter extends IDataRepository {
  */
 export interface IDataRepository {
     /**
+     * Counts a list of items.
+     *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * class User {
+     *   id: number = -1;
+     * }
+     *
+     * async function countActiveUsers(repo: IDataRepository): Promise<number> {
+     *   // in SQL context
+     *   return await repo.find(User, {
+     *     where: 'is_active=$1 AND (is_deleted=$2 OR is_deleted IS NULL)',
+     *     params: [ true, false ],  // $1, $2
+     *   })
+     * }
+     * ```
+     *
+     * @param {Constructor<T>} type The class / type.
+     * @param {Nilable<IFindOptions>} [options] The custom options.
+     *
+     * @returns {Promise<T[]>} The promise with the items.
+     */
+    count<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOptions>): Promise<number>;
+
+    /**
      * Finds a list of items.
      *
      * @example
@@ -78,7 +105,7 @@ export interface IDataRepository {
      * async function load10ActiveUsersAndSkipFirst(repo: IDataRepository): Promise<User[]> {
      *   // in SQL context
      *   return await repo.find(User, {
-     *     where: 'is_active=$1 AND (is_deleted=$2 or is_deleted IS NULL)',
+     *     where: 'is_active=$1 AND (is_deleted=$2 OR is_deleted IS NULL)',
      *     params: [ true, false ],  // $1, $2
      *
      *     offset: 1,
@@ -114,7 +141,7 @@ export interface IDataRepository {
      * async function loadLastActiveUser(repo: IDataRepository): Promise<User> {
      *   // in SQL context
      *   return await repo.findOne(User, {
-     *     where: 'is_active=$1 AND (is_deleted=$2 or is_deleted IS NULL)',
+     *     where: 'is_active=$1 AND (is_deleted=$2 OR is_deleted IS NULL)',
      *     params: [ true, false ],  // $1, $2
      *
      *     sort: {

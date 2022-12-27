@@ -45,6 +45,11 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
+    public abstract count<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOptions>): Promise<number>;
+
+    /**
+     * @inheritdoc
+     */
     public abstract find<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOptions>): Promise<T[]>;
 
     /**

@@ -1,8 +1,9 @@
 # Change Log (@egomobile/orm)
 
-## 0.10.0
+## 0.10.1
 
 - add `count()` method to [IDataRepository](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html)
+- (bug-)fixes
 
 ## 0.9.0
 

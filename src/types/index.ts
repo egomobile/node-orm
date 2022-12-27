@@ -71,7 +71,7 @@ export interface IDataRepository {
      *
      * async function countActiveUsers(repo: IDataRepository): Promise<number> {
      *   // in SQL context
-     *   return await repo.find(User, {
+     *   return await repo.count(User, {
      *     where: 'is_active=$1 AND (is_deleted=$2 OR is_deleted IS NULL)',
      *     params: [ true, false ],  // $1, $2
      *   })

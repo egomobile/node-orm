@@ -18,6 +18,9 @@
 import type { IDataAdapter, IDataContext, EntityConfigurations, IFindOptions, IFindOneOptions } from "../types";
 import type { Constructor, List, Nilable } from "../types/internal";
 
+/**
+ * Options for a data context.
+ */
 export interface IDataContextOptions {
     /**
      * The data adapter to use.
@@ -27,6 +30,13 @@ export interface IDataContextOptions {
      * The configurations of all entities / tables.
      */
     entities: EntityConfigurations;
+    /**
+     * Indicates that the special value `NULL` should not be used
+     * by default.
+     *
+     * @default `false`
+     */
+    noDbNull?: Nilable<boolean>;
 }
 
 export class DataContext implements IDataContext {
@@ -51,6 +61,10 @@ export class DataContext implements IDataContext {
 
     public insert<T extends any = any>(entities: T | List<T>) {
         return this.options.adapter.insert(entities);
+    }
+
+    public get noDbNull(): boolean {
+        return !!this.options.noDbNull;
     }
 
     public query<T extends any = any>(q: any, ...paramsOrArgs: any[]): Promise<T> {

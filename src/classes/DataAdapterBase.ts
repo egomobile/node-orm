@@ -15,8 +15,27 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import type { IDataAdapter, IDataContext, IFindOneOptions, IFindOptions } from "../types";
+import type { IDataAdapter, IDataContext, IEntityConfig, IFindOneOptions, IFindOptions } from "../types";
 import type { Constructor, List, Nilable } from "../types/internal";
+import { isNil } from "../utils/internal";
+
+/**
+ * Result of a `DataAdapterBase.getEntityByType()` call.
+ */
+export interface IEntityInfo {
+    /**
+     * The underlying config.
+     */
+    config: IEntityConfig;
+    /**
+     * The name.
+     */
+    name: string;
+    /**
+     * Values, that indicates, if `DbNull` should be used or not.
+     */
+    noDbNull: boolean;
+}
 
 /**
  * A basic data adapter.
@@ -62,14 +81,21 @@ export abstract class DataAdapterBase implements IDataAdapter {
      *
      * @param {Constructor<any>} type The type of the entity.
      *
-     * @returns {object|null} The object or (null), if not found.
+     * @returns {IEntityInfo|null} The object or (null), if not found.
      */
-    public getEntityByType(type: Constructor<any>) {
+    public getEntityByType(type: Constructor<any>): IEntityInfo | null {
         for (const [name, config] of Object.entries(this.context.entities)) {
             if (config.type === type) {
+                let shouldNotUseDbNull = this.context.noDbNull;
+                if (!isNil(config.noDbNull)) {
+                    // use config specific instead
+                    shouldNotUseDbNull = !!config.noDbNull;
+                }
+
                 return {
                     config,
-                    name
+                    name,
+                    "noDbNull": shouldNotUseDbNull
                 };
             }
         }
@@ -82,10 +108,11 @@ export abstract class DataAdapterBase implements IDataAdapter {
      *
      * @param {Constructor<any>} type The type of the entity.
      *
-     * @returns {object} The object.
+     * @returns {IEntityInfo} The object.
      */
-    public getEntityByTypeOrThrow(type: Constructor<any>) {
+    public getEntityByTypeOrThrow(type: Constructor<any>): IEntityInfo {
         const entity = this.getEntityByType(type);
+
         if (entity) {
             return entity;
         }

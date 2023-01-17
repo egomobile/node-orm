@@ -38,6 +38,10 @@ export interface IDataContext extends IDataRepository {
      * The list of entity configurations.
      */
     entities: EntityConfigurations;
+    /**
+     * Default value, which indicates if `DbNull` value should not be used.
+     */
+    noDbNull: boolean;
 }
 
 /**
@@ -341,6 +345,11 @@ export interface IEntityConfig {
      * List of columns / fields which representthe ID.
      */
     ids?: Nilable<string[]>;
+    /**
+     * Indicates that the special value `NULL` should not be used
+     * for this entity.
+     */
+    noDbNull?: Nilable<boolean>;
     /**
      * The class / type to use to create instances for an entity.
      */

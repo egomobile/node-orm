@@ -1,5 +1,9 @@
 # Change Log (@egomobile/orm)
 
+## 0.11.0
+
+- add `noDbNull` setting to `IDataContextOptions` and `IEntityConfig` interfaces
+
 ## 0.10.1
 
 - add `count()` method to [IDataRepository](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html)

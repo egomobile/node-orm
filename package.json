@@ -1,6 +1,6 @@
 {
   "name": "@egomobile/orm",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "A simple and generic ORM mapper.",
   "main": "lib/index.js",
   "engines": {

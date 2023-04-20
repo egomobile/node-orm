@@ -1,6 +1,10 @@
 # Change Log (@egomobile/orm)
 
-## 0.11.0
+## 0.12.0
+
+- fix `DataContext` class
+
+## 0.11.1
 
 - add `noDbNull` setting to `IDataContextOptions` and `IEntityConfig` interfaces
 

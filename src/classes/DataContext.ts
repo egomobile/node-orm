@@ -40,15 +40,16 @@ export interface IDataContextOptions {
 }
 
 export class DataContext implements IDataContext {
+    public readonly entities: EntityConfigurations;
+
     public constructor(public readonly options: IDataContextOptions) {
+        this.entities = {
+            ...options.entities
+        };
     }
 
     public count<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOptions>) {
         return this.options.adapter.count<T>(type, options);
-    }
-
-    public get entities(): EntityConfigurations {
-        return this.options.entities;
     }
 
     public find<T extends any = any>(type: Constructor<T>, options?: Nilable<IFindOptions>) {

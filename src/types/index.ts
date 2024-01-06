@@ -231,6 +231,59 @@ export interface IDataRepository {
      * Does a raw query and maps the result(s) to entity objects.
      * The classes do not need to be configured in context, so it is
      * possbile to implement and work with "joins".
+     * The difference to `queryAndMap()` is, that is makes use of cursor pattern
+     * instead of returning final data.
+     *
+     * @example
+     * ```
+     * import { IDataRepository } from '@egomobile/orm'
+     *
+     * class UserAndRole {
+     *   role_id!: string;
+     *   user_id!: string;
+     * }
+     *
+     * async function loadUserRoles(repo: IDataRepository): AsyncGenerator<UserAndRole> {
+     *   // PostgreSQL example
+     *   // s. https://github.com/egomobile/node-orm-pg
+     *
+     *   return repo.queryAndIterate(
+     *     UserAndRole,  // type of the target entity
+     *                   // does not need to be configured
+     *                   // in data context
+     *
+     *     // build query
+     *     "SELECT DISTINCT ur.id AS role_id, u.id AS user_id " +
+     *     "FROM user_roles ur " +
+     *     "INNER JOIN users u ON u.id = ur.user_id " +
+     *     "WHERE u.is_active = $1 AND u.is_deleted = $2;",
+     *
+     *     // additional parameters
+     *     true, false  // $1, $2
+     *   )
+     * }
+     *
+     * const iterator = loadUserRoles(
+     *   // ... your repo instance ...
+     * )
+     *
+     * for await (const userAndRole of iterator) {
+     *   // your code ...
+     * }
+     * ```
+     *
+     * @param {Constructor<T>} type The target type.
+     * @param {any} q The object / value, which represents the query.
+     * @param {any[]} [paramsOrArgs] A list of optional parameters or arguments for the query.
+     *
+     * @returns {AsyncGenerator<T>} The async generator.
+     */
+    queryAndIterate<T extends any = any>(type: Constructor<T>, q: any, ...paramsOrArgs: any[]): AsyncGenerator<T>;
+
+    /**
+     * Does a raw query and maps the result(s) to entity objects.
+     * The classes do not need to be configured in context, so it is
+     * possbile to implement and work with "joins".
      *
      * @example
      * ```

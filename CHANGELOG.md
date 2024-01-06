@@ -1,5 +1,10 @@
 # Change Log (@egomobile/orm)
 
+## 0.14.0
+
+- add `queryAndIterate()` to [IDataRepository interface](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html)
+- `npm update`s
+
 ## 0.13.1
 
 - library required at least [Node 18](https://nodejs.org/en/blog/release/v18.0.0/) now

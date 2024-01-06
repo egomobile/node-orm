@@ -183,6 +183,20 @@ export abstract class DataAdapterBase implements IDataAdapter {
     /**
      * @inheritdoc
      */
+    public async *queryAndIterate<T extends any = any>(type: Constructor<T>, q: any, ...paramsOrArgs: any[]): AsyncGenerator<T> {
+        // in implemenations like PostgreSQL or Mongo
+        // this should be overwritten with a cursor pattern
+
+        const allRows = await this.queryAndMap(type, q, ...paramsOrArgs);
+
+        for (const row of allRows) {
+            yield row;
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public abstract queryAndMap(type: Constructor<any>, q: any, ...paramsOrArgs: any[]): Promise<any[]>;
 
     /**

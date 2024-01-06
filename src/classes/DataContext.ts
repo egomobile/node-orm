@@ -72,6 +72,10 @@ export class DataContext implements IDataContext {
         return this.options.adapter.query(q, ...paramsOrArgs);
     }
 
+    public queryAndIterate<T extends any = any>(type: Constructor<T>, q: any, ...paramsOrArgs: any[]): AsyncGenerator<T> {
+        return this.options.adapter.queryAndIterate(type, q, ...paramsOrArgs);
+    }
+
     public queryAndMap<T extends any = any>(type: Constructor<T>, q: any, ...paramsOrArgs: any[]): Promise<T[]> {
         return this.options.adapter.queryAndMap(type, q, ...paramsOrArgs);
     }

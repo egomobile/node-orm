@@ -408,7 +408,7 @@ export interface IEntityConfig<TEntity extends unknown = any> {
     /**
      * The custom field configurations.
      */
-    fields?: Nilable<EntityFieldConfigurations>;
+    fields?: Nilable<EntityFieldConfigurations<TEntity>>;
     /**
      * List of columns / fields which representthe ID.
      */

@@ -425,7 +425,7 @@ export interface IEntityConfig<TEntity extends unknown = any> {
     /**
      * The class / type to use to create instances for an entity.
      */
-    type: TEntity;
+    type: Constructor<TEntity>;
 }
 
 /**

@@ -1,6 +1,6 @@
 # Change Log (@egomobile/orm)
 
-## 0.15.0
+## 0.15.3
 
 - add `verifyEntityConfigurations()` and `verifyForStrictEntityDocumentation()` functions
 - add `comment` props to [IEntityConfig](https://egomobile.github.io/node-orm/interfaces/IEntityConfig.html) and [IEntityFieldConfig](https://egomobile.github.io/node-orm/interfaces/IEntityFieldConfig.html) types

@@ -404,7 +404,7 @@ export interface IDataRepository {
 /**
  * A configuration for an entity.
  */
-export interface IEntityConfig<TEntity extends Constructor<any> = Constructor<any>> {
+export interface IEntityConfig<TEntity extends unknown = any> {
     /**
      * A comment (or description) for this entity, which can be used as documentation later, e.g.
      */

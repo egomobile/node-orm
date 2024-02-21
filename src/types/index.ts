@@ -38,7 +38,7 @@ export type EntityConfigurations = {
 /**
  * Object with entity configurations.
  */
-export type EntityFieldConfigurations<TEntity extends Constructor<unknown> = Constructor<any>> = {
+export type EntityFieldConfigurations = {
     /**
      * List of `IEntityFieldConfig`s grouped by their attribute / column names.
      */
@@ -404,7 +404,7 @@ export interface IDataRepository {
 /**
  * A configuration for an entity.
  */
-export interface IEntityConfig<TEntity extends Constructor<unknown> = Constructor<any>> {
+export interface IEntityConfig<TEntity extends Constructor<any> = Constructor<any>> {
     /**
      * A comment (or description) for this entity, which can be used as documentation later, e.g.
      */
@@ -412,7 +412,7 @@ export interface IEntityConfig<TEntity extends Constructor<unknown> = Constructo
     /**
      * The custom field configurations.
      */
-    fields?: Nilable<EntityFieldConfigurations<TEntity>>;
+    fields?: Nilable<EntityFieldConfigurations>;
     /**
      * List of columns / fields which representthe ID.
      */

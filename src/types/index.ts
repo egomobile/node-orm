@@ -38,12 +38,8 @@ export type EntityConfigurations = {
 /**
  * Object with entity configurations.
  */
-export type EntityFieldConfigurations = {
-    /**
-     * List of `IEntityFieldConfig`s grouped by their attribute / column names.
-     */
-    [fieldName: string]: IEntityFieldConfig;
-};
+export type EntityFieldConfigurations<TEntity extends unknown = any> =
+    Record<keyof TEntity, IEntityFieldConfig>;
 
 /**
  * A data context.

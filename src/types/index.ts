@@ -28,7 +28,22 @@ export type DataTransformer = (value: any) => any;
 /**
  * Object with entity configurations.
  */
-export type EntityConfigurations = Record<string, IEntityConfig>;
+export type EntityConfigurations = {
+    /**
+     * List of `IEntityConfig`s grouped by their entity / table names.
+     */
+    [entityName: string]: IEntityConfig;
+};
+
+/**
+ * Object with entity configurations.
+ */
+export type EntityFieldConfigurations<TEntity extends Constructor<unknown> = Constructor<any>> = {
+    /**
+     * List of `IEntityFieldConfig`s grouped by their attribute / column names.
+     */
+    [fieldName: string]: IEntityFieldConfig;
+};
 
 /**
  * A data context.
@@ -389,11 +404,15 @@ export interface IDataRepository {
 /**
  * A configuration for an entity.
  */
-export interface IEntityConfig {
+export interface IEntityConfig<TEntity extends Constructor<unknown> = Constructor<any>> {
+    /**
+     * A comment (or description) for this entity, which can be used as documentation later, e.g.
+     */
+    comment?: Nilable<string>;
     /**
      * The custom field configurations.
      */
-    fields?: Nilable<Record<string, IEntityFieldConfig>>;
+    fields?: Nilable<EntityFieldConfigurations<TEntity>>;
     /**
      * List of columns / fields which representthe ID.
      */
@@ -406,13 +425,17 @@ export interface IEntityConfig {
     /**
      * The class / type to use to create instances for an entity.
      */
-    type: Constructor<any>;
+    type: TEntity;
 }
 
 /**
  * A configuration for an entity field.
  */
 export interface IEntityFieldConfig {
+    /**
+     * A comment (or description) for this field, which can be used as documentation later, e.g.
+     */
+    comment?: Nilable<string>;
     /**
      * The custom and optional data transformer.
      */

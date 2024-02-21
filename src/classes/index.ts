@@ -14,3 +14,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 export * from "./DataAdapterBase";
+export {
+    IDataContextOptions
+} from "./DataContext";
+export * from "./ValidationError";

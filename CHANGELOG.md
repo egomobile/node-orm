@@ -1,5 +1,12 @@
 # Change Log (@egomobile/orm)
 
+## 0.15.0
+
+- add `verifyEntityConfigurations()` and `verifyForStrictEntityDocumentation()` functions
+- add `comment` props to [IEntityConfig](https://egomobile.github.io/node-orm/interfaces/IEntityConfig.html) and [IEntityFieldConfig](https://egomobile.github.io/node-orm/interfaces/IEntityFieldConfig.html) types
+- `npm update`s
+- improve type definitions
+
 ## 0.14.0
 
 - add `queryAndIterate()` to [IDataRepository interface](https://egomobile.github.io/node-orm/interfaces/IDataRepository.html)

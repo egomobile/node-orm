@@ -13,6 +13,12 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+export function isAsync(func: ((...args: any[]) => any)): boolean {
+    const funcStr = func.toString();
+
+    return /^\s*async\s+/.test(funcStr);
+}
+
 export function isNil(val: unknown): val is (null | undefined) {
     return typeof val === "undefined" || val === null;
 }
